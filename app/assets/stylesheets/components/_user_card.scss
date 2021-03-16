@@ -1,17 +1,18 @@
 .card-user {
   overflow: hidden;
   height: 80px;
-  background: white;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.9));
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   max-width: 30vw;
   border-radius: 10px;
-  margin: 10px auto;
+  margin: 20px auto 10px;
+  padding-left: 10px;
 }
 
 .card-user img {
-  height: 80px;
+  height: 60px;
   width: 80px;
   object-fit: cover;
 }
@@ -41,17 +42,24 @@
 
 .card-user-infos {
   width: 100%;
+  padding-left: 10px;
+}
+
+.card-user-infos h2 {
+  font-size: 1rem;
 }
 
 .invite-btn {
   margin-right: 10px;
-  background-color: #5E548E;
+  background: linear-gradient(to right, #4568DC, #B06AB3);
   color: white;
-  border: 1px solid black;
   border-radius: 15px;
   transition: 0.3s;
+  padding: 5px 10px;
+  border: none;
   &:hover {
-    background-color: #BE95C4;
-    color: black;
+    background: linear-gradient(to right, #B06AB3, #4568DC);
+    color: white;
+    text-decoration: none;
   }
 }

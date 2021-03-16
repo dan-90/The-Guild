@@ -1,51 +1,60 @@
-  <% if current_user.guildmemberships.where(status: "pending").present? %>
-    <div class="invites">
-    <% current_user.guildmemberships.where(status: "pending").each do |membership| %>
-      <p style="margin-top: 10px;">You have been invited to</p>
-      <p><strong><%= membership.guild.name %></strong></p>
-      <p>by <%= membership.guild.user.full_name %></p>
-      <%= link_to "Accept", status_guild_guildmembership_path(membership.guild, membership, status: "approved"), class:"btn btn-success", method: :patch, remote: true %>
-      <%= link_to "Reject", guild_guildmembership_path(membership.guild, membership), class:"btn btn-danger", method: :delete, remote: true%>
-    <% end %>
-    </div>
-  <% end %>
-
-<div class="main-glass">
-  <div class="main">
-    <h1>Your Guilds</h1>
-    <div class="bottom-shadow"></div>
-    <div class="guild-list-container">
-      <% @guilds.each do |guild| %>
-       <% if guild.guildmemberships.where(user: current_user, status: "approved").present? || guild.user == current_user  %>
-        <div class="guild">
-          <%= link_to guild_path(guild) do %>
-            <div class="guild-img">
-              <% if guild.photo.attached? %>
-               <%= cl_image_tag(guild.photo.key, crop: :fill) %>
-              <% else %>
-                <img src="https://res.cloudinary.com/dx6rtf9wl/image/upload/v1614945426/download_jisl0t.jpg" alt="">
-              <% end %>
+    <div class="main-glass">
+      <div class="main" style="position: relative;">
+        <% if current_user.guildmemberships.where(status: "pending").present? %>
+            <button id="open"><i class="fas fa-envelope"></i></button>
+            <div class="invites" id="invites">
+              <button id="close">
+                <i class="fas fa-times"></i>
+              </button>
+              <div class="invites-text">
+                <% current_user.guildmemberships.where(status: "pending").each do |membership| %>
+                  <p>You have been invited to</p>
+                  <p><strong><%= membership.guild.name %></strong></p>
+                  <p>by <%= membership.guild.user.full_name %></p>
+                  <div class="invite-btns">
+                    <%= link_to "Accept", status_guild_guildmembership_path(membership.guild, membership, status: "approved"), class: "invite-btn notification-btn", style: "padding: 10px 20px; margin-right: 10px;", method: :patch, remote: true  %>
+                    <%= link_to "Reject", guild_guildmembership_path(membership.guild, membership), class:"invite-btn notification-btn", style: "padding: 10px 20px; margin-left: 10px;", method: :delete, remote: true %>
+                  </div>
+                <% end %>
+              </div>
             </div>
+        <% end %>
+        <h1>Your Guilds</h1>
+          <div class="bottom-shadow"></div>
+          <div class="guild-list-container">
+            <% @guilds.each do |guild| %>
+              <% if guild.guildmemberships.where(user: current_user, status: "approved").present? || guild.user == current_user  %>
+                <div class="guild">
+                  <%= link_to guild_path(guild) do %>
+                <div class="guild-img">
+                  <% if guild.photo.attached? %>
+                    <%= cl_image_tag(guild.photo.key, crop: :fill) %>
+                  <% else %>
+                    <img src="https://res.cloudinary.com/dx6rtf9wl/image/upload/v1614945426/download_jisl0t.jpg" alt="">
+              <% end %>
+                </div>
             <div class="guild-info">
               <div class="guild-info1">
                 <h4><%= guild.name %></h4>
               </div>
               <div class="guild-info2">
-                 <p><%= guild.category %></p>
+                 <h6 style="padding-left: 2px; font-size: 20px;"><i class="fas fa-user-astronaut"></i> <%=guild.members.count %></h6>
                  <p><%= guild.description %></p>
               </div>
               <div class="guild-info3">
-              <%= link_to "Leave", guild_guildmembership_path(guild, id: guild.guildmemberships.find_by(user: current_user, guild: guild)), method: :delete, data: { confirm: "Are you sure you wish to leave #{guild.name}"}, style: "position: absolute; right: 30px; top: 10px; padding: 5px;", class: "btn btn-danger", remote: true unless guild.user == current_user %>
+              <%= link_to '<i class="fas fa-sign-out-alt"></i>'.html_safe, guild_guildmembership_path(guild, id: guild.guildmemberships.find_by(user: current_user, guild: guild)), method: :delete, data: { confirm: "Are you sure you wish to leave #{guild.name}"}, style: "position: absolute; right: 10px; top: 10px;", class: "btn btn-exit", title:"Leave this guild?", remote: true unless guild.user == current_user %>
+              </div>
+              <p style="position: absolute; left: 20px; top: 10px; padding: 2px 10px; background: white; border-radius: 0 0 10px 10px;"><%= guild.category %></p>
             </div>
-            </div>
-          <% end %>
+            <% end %>
         </div>
           <% end %>
         <% end %>
         <%= link_to new_guild_path(@guild) do %>
           <div id="empty-guild">
             <div>
-             <i class="fas fa-plus-circle"> Create a new guild</i>
+             <i class="fas fa-plus-circle"></i>
+             <span >Create a new guild</span>
             </div>
           </div>
         <% end %>

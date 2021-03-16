@@ -17,5 +17,66 @@
   li {
     margin: 2rem 0;
     font-size: 20px;
+    position: relative;
+    i {
+      position:absolute;
+      left: 7px;
+      top: -17px;
+      color: #f9e279;
+    }
   }
+}
+
+#empty-members-card {
+  overflow: hidden;
+  height: 150px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  max-width: 30vw;
+  border-radius: 10px;
+  margin-top: 125px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#pending-card {
+  overflow: hidden;
+  height: 62px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  max-width: 15vw;
+  border-radius: 10px;
+  margin: 10px auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  margin-top: 50px;
+}
+
+#bottom-membership-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.card-membership-user {
+  overflow: hidden;
+  height: 80px;
+  background: linear-gradient(to right bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.9));
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  max-width: 30vw;
+  border-radius: 10px;
+  margin: 20px auto 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
